@@ -121,7 +121,7 @@ func (s *String) ReadFrom(r io.Reader) (n int64, err error) {
 	var l VarInt // String length
 
 	nn, err := l.ReadFrom(r)
-	if err != nil {
+	if err != nil || l > 1048576 {
 		return nn, err
 	}
 	n += nn
